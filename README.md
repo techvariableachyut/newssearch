@@ -1,2 +1,2 @@
 # newssearch
-News search backend
+News search api endpoint
