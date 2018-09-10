@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ../partials/head.ejs %>
+  </head>
+  <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <%- include ../partials/header.ejs %>
+    <div class="app-body">
+      <div class="sidebar">
+       <%- include ../partials/nav.ejs %>
+      </div>
+      <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">
+            <a href="#">Admin</a>
+          </li>
+          <li class="breadcrumb-item active">Create Social Media</li>
+          <!-- Breadcrumb Menu-->
+         
+        </ol>
+        <div class="container-fluid">
+            <div class="col-sm-7">
+                <div class="card">
+                  <div class="card-header">
+                    <strong>Add Socila Media Sites</strong>
+                  </div>
+
+                  <form action="" method="post">
+
+                  <div class="card-body" id="social-media-app">
+                  <div class="alert alert-danger" id="error-div" style="display:none;" role="alert">Please Select all the feilds</div>
+                    <div class="form-group">
+                      <label for="company"> Media Sites Site</label>
+                        <select  name="smsite" class="form-control" id="smsite">
+                          <option value="">Select</option>
+                          <option value="facebook">Facebook</option>
+                          <option value="instagram">Instagram</option>
+                          <option value="twitter">Twitter</option>
+                          <option value="reddit">Reddit</option>
+                          <option value="youtube">Youtube</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="app">App Name</label>
+                      <input class="form-control" id="appname" name="appname" type="text" placeholder="Enter App name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="vat">Description</label>
+                        <textarea class="form-control" name="appdesc" id="appdesc" cols="30" rows="5"></textarea>
+                    </div>
+
+                  </div>
+                  <div class="card-footer">
+                      <!-- <button id="create_app_btn" class="btn btn-sm btn-primary" type="button">
+                        <i class="fa fa-dot-circle-o"></i> Next
+                      </button> -->
+                  </div>
+                   
+                </div>
+
+              </div>
+        </div>
+      </main>
+
+
+      <aside id="aside" class="aside-menu">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#settings" role="tab">
+                <i class="icon-settings"></i>
+              </a>
+            </li>  
+          </ul>
+          <!-- Tab panes-->
+          <div class="tab-content">
+            <div class="tab-pane p-3 active" id="settings" role="tabpanel">
+            </div>  
+          </div>
+          <div class="aside-footer">
+            <div class="p-3 float-right">
+                <button 
+                    class="btn btn-lg btn-primary" 
+                    id="create-app-btn"
+                    type="submit">Save And Continue</button>
+            </div>
+          </div>
+                    
+          </form>
+      </aside>
+
+
+    </div>
+    <%- include ../partials/footer.ejs %>
+    <%- include ../partials/scripts.ejs %>
+
+    <script src="/js/app/config.js"></script>
+    <script src="/js/app/social-media-app-creation.js"></script>  
+  </body>
+</html>

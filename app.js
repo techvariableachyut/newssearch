@@ -1,60 +1,86 @@
-var port = process.env.PORT || 3000,
-    http = require('http'),
-    fs = require('fs');
+require('dotenv').config()
+const express = require('express');
+const session = require('express-session')
+const bodyParser = require('body-parser');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const config = require('./config/config');
+const isDev = process.env.NODE_ENV !== 'production';
+const port  = process.env.PORT || 8080;
+const app = express();
+const { isLoggedIn } = require('./routes/middlewares/auth')
+const DynamoDBStore = require('connect-dynamodb')({session: session});
+const AWS = require('aws-sdk');
 
-var app = http.createServer(function (req, res) {
-  if (req.url.indexOf('/img') != -1) {
-    var filePath = req.url.split('/img')[1];
-    fs.readFile(__dirname + '/public/img' + filePath, function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'image/svg+xml'});
-        res.write(data);
-      }
-      res.end();
-    });
-  } else if (req.url.indexOf('/js') != -1) {
-    var filePath = req.url.split('/js')[1];
-    fs.readFile(__dirname + '/public/js' + filePath, function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'text/javascript'});
-        res.write(data);
-      }
-      res.end();
-    });
-  } else if(req.url.indexOf('/css') != -1) {
-    var filePath = req.url.split('/css')[1];
-    fs.readFile(__dirname + '/public/css' + filePath, function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'text/css'});
-        res.write(data);
-      }
-      res.end();
-    });
-  } else {
-    fs.readFile(__dirname + '/public/index.html', function (err, data) {
-      if (err) {
-        res.writeHead(404, {'Content-Type': 'text/plain'});
-        res.write('Error 404: Resource not found.');
-        console.log(err);
-      } else {
-        res.writeHead(200, {'Content-Type': 'text/html'});
-        res.write(data);
-      }
-      res.end();
-    });
+passport.use(new LocalStrategy(
+  { 
+    usernameField: 'email',
+    passwordField: 'password',
+  },
+  (email, password, done) => {
+    const user = config.users[0] 
+    if(email === user.email && password === user.password) {
+      return done(null, user)
+    }else{
+      return false
+    }
   }
-}).listen(port, '0.0.0.0');
+));
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  const user = config.users[0].id === id ? config.users[0] : false; 
+  done(null, user);
+});
+
+var AWSConfigJSON = null;
+var client= null
+if(isDev){
+  client =new AWS.DynamoDB({ 
+    endpoint: new AWS.Endpoint(config.aws_local_config.endpoint),
+    region: config.aws_local_config.region
+  })
+}else{
+  AWSConfig = {
+    accessKeyId: config.aws_remote_config.accessKeyId,
+    secretAccessKey: config.aws_remote_config.secretAccessKey,
+    region: config.aws_remote_config.region
+  }
+}
+
+var options = {
+  table: config.aws_user_session_table_name,
+  client,
+  AWSConfigJSON,
+  readCapacityUnits: 5,
+  writeCapacityUnits: 5
+};
+
+app.use(express.static('public'))
+app.use(session({
+  store: new DynamoDBStore(options), 
+  secret: 'dsdasda2q323hsdfsdf',
+  resave: false,
+  saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.set('view engine','ejs');
+// API routes
+require('./routes/routes')(app,passport);
+// Route not found
+app.get('*', isLoggedIn,function(req, res){
+  res.redirect('/')
+});
+
+app.listen(port,function(){
+  console.log(`app runing on port ${port}`);
+});
 
 module.exports = app;
