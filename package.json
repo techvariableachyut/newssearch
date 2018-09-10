@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node app",
     "start:dev": "nodemon app",
-    "test": "exit 0"
+    "test": "exit 0",
+    "create:tables":"node ./scripts/createTables"
   },
   "engines": {
     "node": ">=6"
