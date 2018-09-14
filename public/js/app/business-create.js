@@ -190,6 +190,52 @@ function onChooseApp(){
 
   })
 
+  // Pending function for update of business details
+  $("#save_and_update_btn").click(function(e){
+    e.preventDefault()
+    var bid = $("input[name=bid]").val();
+    var businessName = $("input[name=bname]").val();
+    var industryName = $("input[name=industryname]").val();
+    var bdesc =  $("textarea[name=bdesc]").val();
+    var baddress = $("input[name=baddress]").val();
+    var badmin = $("input[name=badmin]").val();
+    var badminemail = $("input[name=badminemail]").val();
+    var socialMedia = []
+    for (var key in config) {
+      var temp = {}
+      var checkPoint = $("#activator_"+key).is(':checked')
+      if(checkPoint){        
+        var appId = $("#app-select-"+key).val() 
+        for (var k in  config[key].searchon) {
+          Object.assign(temp,{
+            [k]: $(`#${key}_${k}`).val()
+          })
+        }
+        Object.assign(temp,{
+          appId: appId
+        })
+      }
+      socialMedia.push({
+        [key]: temp
+      })
+    }
+    var params = {
+      bid,
+      businessName,
+      industryName,
+      bdesc,
+      baddress,
+      badmin,
+      badminemail,
+      socialMedia:JSON.stringify(socialMedia)
+    }
+    $.post("/business/update/:bid",params)
+    .done(function( data ) {
+      window.location = "/";
+    });
+
+  })
+
 
 })(config);
 

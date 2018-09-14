@@ -82,8 +82,88 @@ module.exports = (app) => {
           });
         } else {
           const { Items } = data;
-          res.render('business/details',Items[0])
+          console.log(Items);
+          console.log()
+          res.render('business/details',{Items:Items[0]})
+
         }
       });
   })
+
+
+  app.get('/business/update/:bid',isLoggedIn,(req,res)=>{
+      const bid = req.params.bid
+      // req.query.id;
+      const params = {
+        TableName: config.aws_business_table_name,
+        KeyConditionExpression: 'id = :i',
+        ExpressionAttributeValues: {
+          ':i': bid
+        }
+      };
+      docClient.query(params, function(err, data) {
+        if (err) {
+          res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        } else {
+          const { Items } = data;
+          console.log(Items);
+          console.log()
+          res.render('business/update_details',{Items:Items[0]})
+
+        }
+      });
+  })
+
+  app.post('/business/update/:bid',isLoggedIn,(req,res)=>{
+      const bid = req.params.bid
+      // req.query.id;
+      // const params = {
+      //   TableName: config.aws_business_table_name,
+      //   KeyConditionExpression: 'id = :i',
+      //   ExpressionAttributeValues: {
+      //     ':i': bid
+      //   }
+      // };
+      
+
+      var params = {
+        TableName: config.aws_business_table_name,
+        Key: { // The primary key of the item (a map of attribute name to AttributeValue)
+
+            id : bid, //(string | number | boolean | null | Binary)
+            // more attributes...
+        },
+        UpdateExpression: 'SET industryName : req.', // String representation of the update to an attribute
+            // SET set-action , ... 
+            // REMOVE remove-action , ...  (for document support)
+            // ADD add-action , ... 
+            // DELETE delete-action , ...  (previous DELETE equivalent)
+        ConditionExpression: 'attribute_exists(attribute_name)', // optional String describing the constraint to be placed on an attribute
+        ExpressionAttributeNames: { // a map of substitutions for attribute names with special characters
+            //'#name': 'attribute name'
+        },
+        ExpressionAttributeValues: { // a map of substitutions for all attribute values
+            ':value': 'VALUE'
+        },
+        ReturnValues: 'NONE', // optional (NONE | ALL_OLD | UPDATED_OLD | ALL_NEW | UPDATED_NEW)
+        ReturnConsumedCapacity: 'NONE', // optional (NONE | TOTAL | INDEXES)
+        ReturnItemCollectionMetrics: 'NONE', // optional (NONE | SIZE)
+    };
+    docClient.update(params, function(err, data) {
+        if (err) ppJson(err); // an error occurred
+        else ppJson(data); // successful response
+    });
+
+
+
+      docClient.update(params, function(err, data) {
+        if (err) ppJson(err); // an error occurred
+        else ppJson(data); // successful response
+      });
+  })
+
+
 };

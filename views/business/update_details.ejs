@@ -22,37 +22,39 @@
             <div class="col-sm-7">
                 <div class="card">
                   <div class="card-header">
-                    <strong>Business Details</strong>
+                    <strong>Update Details</strong>
                   </div>
+
+                  <input type="text" hidden="hidden" name="bid" value=<%= Items.id %>>
 
                     <div class="card-body">
                       <div class="form-group">
                         <label for="company">Business Name</label>
-                        <input class="form-control" id="company" name="bname" type="text" disabled="disabled" value=<%= Items.businessname %> >
+                        <input class="form-control" id="company" name="bname" type="text" value=<%= Items.businessname %> >
                       </div>
                       <div class="form-group">
                         <label for="vat">Industry Name</label>
-                        <input class="form-control" id="vat" name="industryname" type="text" disabled="disabled" value=<%= Items.industryName %> placeholder="Enter Industry name">
+                        <input class="form-control" id="vat" name="industryname" type="text" value=<%= Items.industryName %> >
                       </div>
 
                       <div class="form-group">
                           <label for="vat">Industry Description</label>
-                          <textarea class="form-control" name="bdesc" name="" id="" cols="30" rows="5" disabled="disabled"><%= Items.businessDesc %></textarea>
+                          <textarea class="form-control" name="bdesc" name="" id="" cols="30" rows="5"><%= Items.businessDesc %></textarea>
                       </div>
 
                       <div class="form-group">
                         <label for="street">Address</label>
-                        <input class="form-control" id="street" name="baddress"  type="text"  disabled="disabled" value=<%= Items.address %> placeholder="Enter Address">
+                        <input class="form-control" id="street" name="baddress"  type="text" value=<%= Items.address %> >
                       </div>
                       <hr>
                       <div class="row">
                         <div class="form-group col-sm-6">
                           <label for="city">Admin Name</label>
-                          <input class="form-control" id="city" name="badmin" type="text" disabled="disabled" value=<%= Items.businessAdminName %> placeholder="Company Admin Name">
+                          <input class="form-control" id="city" name="badmin" type="text" value=<%= Items.businessAdminName %> >
                         </div>
                         <div class="form-group col-sm-6">
                           <label for="postal-code">Email</label>
-                          <input class="form-control" id="postal-code" name="badminemail" type="text" disabled="disabled" value=<%= Items.businessAdminEmail %> placeholder="Admin Email">
+                          <input class="form-control" id="postal-code" name="badminemail" type="text" value=<%= Items.businessAdminEmail %> >
                         </div>
                       </div>
                     </div>
@@ -246,9 +248,8 @@
   </aside>
       <div id="save_and_trigger" class="save_and_trigger">
         <div class="p-3 float-right">
-              <!-- <button id="save_and_trigger_btn" class="btn btn-lg btn-primary" type="button">Save And Continue</button> -->
+              <button id="save_and_update_btn" class="btn btn-lg btn-primary" type="button">Update And Continue</button>
         </div>
-              <a href="/business/update/<%= Items.id %>"><button class="btn btn-lg btn-primary" type="button">Update</button></a>
       </div>
     </div>
 

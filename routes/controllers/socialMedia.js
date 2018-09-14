@@ -112,9 +112,60 @@ module.exports = (app) => {
   })
 
 
-
   app.get('/social-media/app/:appId',isLoggedIn,function(req,res){
-    res.render('socialmedia/config')
-  })
 
-};
+    const appId = req.params.appId
+
+      const params = {
+        TableName: config.aws_social_media_table_name,
+        KeyConditionExpression: 'id = :i',
+        ExpressionAttributeValues: {
+          ':i': appId
+        }
+      };
+
+      docClient.query(params, function(err, data) {
+        if (err) {
+          res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        } else {
+          const { Items } = data;
+          console.log(Items);
+          res.render('socialmedia/view_details',{Items:Items[0]})
+        }
+
+  });
+
+})
+
+  app.get('/social-media/app/update/:appId',isLoggedIn,function(req,res){
+
+    const appId = req.params.appId
+
+      const params = {
+        TableName: config.aws_social_media_table_name,
+        KeyConditionExpression: 'id = :i',
+        ExpressionAttributeValues: {
+          ':i': appId
+        }
+      };
+
+      docClient.query(params, function(err, data) {
+        if (err) {
+          res.send({
+            success: false,
+            message: 'Error: Server error'
+          });
+        } else {
+          const { Items } = data;
+          console.log(Items);
+          res.render('socialmedia/update_config',{Items:Items[0]})
+        }
+
+  });
+
+})
+
+}
