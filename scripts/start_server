@@ -4,7 +4,7 @@ cd /home/ec2-user/node-website
 
 export NODE_ENV=production
 export PORT=80
-export AWS_REGION=aws-codedeploy-ap-southeast-1
+export AWS_REGION=ap-southeast-1
 
 node db/models/business.js
 node db/models/sessions.js
