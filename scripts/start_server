@@ -1,6 +1,16 @@
 #!/bin/bash
 cd /home/ec2-user/node-website
+
+
+export NODE_ENV=development
 export PORT=80
-export NODE_ENV=production
+export AWS_REGION=aws-codedeploy-ap-southeast-1
+
+node db/models/business.js
+node db/models/sessions.js
+node db/models/users.js
+node db/models/socialMedia.js
+node db/models/keyword.js
+
 
 forever start app.js
