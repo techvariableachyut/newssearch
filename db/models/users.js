@@ -1,7 +1,7 @@
 const { ddb } = require( '../index');
 const config = require('../../config/config.js');
 const params = {
-    TableName: config.aws_user_session_table_name,
+    TableName: config.aws_user_table_name,
     KeySchema: [
       {
         AttributeName: 'id',
@@ -9,7 +9,7 @@ const params = {
       },
       {
         AttributeName: 'email',
-        KeyType: 'Range'
+        KeyType: 'RANGE'
       }
     ],
     AttributeDefinitions: [

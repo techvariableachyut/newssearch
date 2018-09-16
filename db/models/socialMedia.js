@@ -19,7 +19,7 @@ const params = {
       WriteCapacityUnits: 5
     }
 }
-  
+
   
 ddb.createTable(params, function(err, data) {
   if (err) {

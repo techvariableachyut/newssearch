@@ -1,7 +1,5 @@
 const AWS = require('aws-sdk');
 const config = require('../../config/config');
-const isDev = process.env.NODE_ENV !== 'production';
-
 module.exports = (app,passport) => {
   app.get('/login',(req,res)=>{
     res.render('login')

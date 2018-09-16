@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const config = require('./config/config');
-const isDev = process.env.NODE_ENV !== 'production';
+const { isLocal } = require('./utils/devEnvCheck.js');
 const port  = process.env.PORT || 9001;
 const app = express();
 const { isLoggedIn } = require('./routes/middlewares/auth')
@@ -36,9 +36,11 @@ passport.deserializeUser((id, done) => {
   done(null, user);
 });
 
+console.log(process.env.NODE_ENV);
+
 var AWSConfigJSON = null;
 var client= null
-if(isDev){
+if( isLocal ){
   client =new AWS.DynamoDB({ 
     endpoint: new AWS.Endpoint(config.aws_local_config.endpoint),
     region: config.aws_local_config.region

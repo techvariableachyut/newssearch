@@ -1,16 +1,13 @@
 #!/bin/bash
-cd /home/ec2-user/node-website
+cd /home/ec2-user/news-search-app
 
-
-export NODE_ENV=production
+# Setting up enviroment variables
+export NODE_ENV=development
 export PORT=80
 export AWS_REGION=ap-southeast-1
 
-node db/models/business.js
-node db/models/sessions.js
-node db/models/users.js
-node db/models/socialMedia.js
-node db/models/keyword.js
+# Creating DB
+node db/migration.js
 
-
+# Strat the app using forever
 forever start app.js

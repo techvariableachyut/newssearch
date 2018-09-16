@@ -1,6 +1,5 @@
 const AWS = require('aws-sdk');
 const config = require('../../config/config.js');
-const isDev = process.env.NODE_ENV !== 'production';
 const { isLoggedIn } = require('../middlewares/auth.js');
 const { docClient } = require( '../../db/');
 const uuid = require('uuid/v4')
@@ -10,12 +9,13 @@ module.exports = (app) => {
         TableName: config.aws_business_table_name,
     };
     docClient.scan(params, function(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-          console.log(data.Items);
+
+       try {
           res.render('business/list',{data:data.Items})
-        }
+       } catch (error) {
+          res.send('something went wrong')        
+       }
+
     });
 
   })

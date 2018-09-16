@@ -5,7 +5,7 @@ module.exports = {
   aws_keywords_table_name: process.env.NODE_ENV+'_keywordsTable',
   aws_business_table_name: process.env.NODE_ENV+'_businessTable',
   aws_local_config: {
-    region: 'local',
+    region: process.env.NODE_ENV,
     endpoint: 'http://localhost:8000'
   },
   aws_remote_config: {

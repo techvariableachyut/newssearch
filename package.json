@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "start": "node app",
-    "start:dev": "nodemon app",
+    "start:dev": "NODE_ENV=local nodemon app",
     "test": "exit 0",
-    "create:tables": "node ./scripts/createTables"
+    "db:migrate": "NODE_ENV=local node ./db/migration.js"
   },
   "engines": {
     "node": ">=6"

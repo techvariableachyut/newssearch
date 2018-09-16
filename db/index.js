@@ -1,7 +1,7 @@
 const config = require('../config/config.js');
 const AWS = require('aws-sdk');
-const isDev = process.env.NODE_ENV !== 'production';
-if (isDev) {
+const { isLocal } = require('../utils/devEnvCheck.js');
+if ( isLocal ) {
   AWS.config.update(config.aws_local_config);
 } else {
   AWS.config.update(config.aws_remote_config);
