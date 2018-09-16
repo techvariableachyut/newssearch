@@ -22,11 +22,4 @@ phases:
 artifacts:
   type: zip
   files:
-    - template.yml
-    - README.md
-    - package.json
-    - app.js
-    - appspec.yml
-    - scripts/*
-    - node_modules/**/*
-    - public/**/*
+    - '**/*'
