@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include ../../partials/head.ejs %>
+  </head>
+  <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <%- include ../../partials/header.ejs %>
+
+    <div class="app-body">
+      <div class="sidebar">
+         <%- include ../../partials/nav.ejs %>
+
+      </div>
+      <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">
+            <a href="#">Admin</a>
+          </li>
+          <li class="breadcrumb-item active">Create Busines</li>
+          <!-- Breadcrumb Menu-->
+          <li class="breadcrumb-item active">Add More Info</li>
+        </ol>
+        <div class="container-fluid">
+            <div class="col-sm-7">
+                <div class="card">
+                  <div class="card-header">
+                    <strong>Business - <%= businessname %></strong>
+                  </div>
+                  <div class="card-body">
+                    
+                    <div class="form-group">
+                      <% if (industryName) { %>
+                        <label for="vat">Industry Name</label>
+                        <h5><%= industryName %></h5>
+                      <% } %>
+                    </div>
+
+                    <div class="form-group">
+
+                      <% if (businessDesc) { %>
+                        <label for="vat">Industry Description</label>
+                        <h5><%= businessDesc %></h5>
+                      <% } %>
+                        
+                    </div>
+
+                    <div class="form-group">
+                      <% if (address) { %>
+                        <label for="address">Address</label>
+                        <h5><%= address %></h5>
+                      <% } %>
+                    </div>
+                    <br>
+                    <strong>Busines Admin Information</strong><br>
+                    <hr>
+                    <div class="row">
+                      <div class="form-group col-sm-6">
+                      <% if (businessname) { %>
+                        <label for="address">Name</label>
+                        <h5><%= businessname %></h5>
+                      <% } %>
+                      </div>
+                      <div class="form-group col-sm-6">
+                        <% if (businessAdminEmail) { %>
+                          <label for="address">Email</label>
+                          <h5><%= businessAdminEmail %></h5>
+                        <% } %>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+        </div>
+      </main>
+      <aside class="aside-menu">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#facebook" role="tab">
+              <i class="icon-social-facebook"></i>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " data-toggle="tab" href="#instagram" role="tab">
+              <i class="icon-social-instagram"></i>
+            </a>
+          </li>
+
+          <li class="nav-item">
+              <a class="nav-link " data-toggle="tab" href="#twitter" role="tab">
+                <i class="icon-social-twitter"></i>
+              </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link " data-toggle="tab" href="#reddit" role="tab">
+              <i class="icon-social-reddit"></i>
+            </a>
+          </li>
+  
+          <li class="nav-item">
+              <a class="nav-link " data-toggle="tab" href="#youtube" role="tab">
+                <i class="icon-social-youtube"></i>
+              </a>
+          </li>
+
+          <li class="nav-item">
+              <a class="nav-link " data-toggle="tab" href="#website" role="tab">
+                <i class="icon-globe"></i>
+              </a>
+          </li>
+
+        </ul>
+        <!-- Tab panes-->
+        <div class="tab-content">
+
+          <div class="tab-pane p-3 active" id="facebook" role="tabpanel">
+              <h6>Facebook</h6>
+              <div class="aside-options">
+                <div class="clearfix mt-4">
+                  <small>
+                    <b>Add Facebook</b>
+                  </small>
+                  <label class="switch switch-3d switch-primary float-right">
+                      <input class="switch-input" type="checkbox" >
+                      <span class="switch-slider"></span>
+                  </label>
+                </div>
+              </div>
+              <hr>
+              <div class="aside-options">
+                  <div class="clearfix mt-4">
+                    <small>
+                      <b>Select App</b>
+                    </small>
+                    <div class="form-group">
+                          <select class="form-control" id="site">
+                            <option>facebook App 01</option>
+                            <option>facebook App 02</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+
+
+              <h6>Configuration</h6>
+              <div class="text-uppercase mb-1 mt-4">
+                <small>
+                  <b>Add keywords</b>
+                </small>
+                <i class="icon-plus float-right"> Add </i>
+              </div>
+              <br>
+              
+              <form class="form-horizontal" action="" method="post">
+                <div class="form-group row">
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Add keyword">
+                  </div>
+                  <div class="col-md-2">
+                      <button class="btn btn-block btn-outline-primary" type="button">Add</button>
+                  </div>
+                </div>
+              </form>  
+          </div>
+
+          <div class="tab-pane p-3" id="twitter" role="tabpanel">
+              <h6>Twitter</h6>
+              <div class="aside-options">
+                <div class="clearfix mt-4">
+                  <small>
+                    <b>Add Twitter</b>
+                  </small>
+                  <label class="switch switch-3d switch-primary float-right">
+                      <input class="switch-input" type="checkbox" >
+                      <span class="switch-slider"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="aside-options">
+                  <div class="clearfix mt-4">
+                    <small>
+                      <b>Select App</b>
+                    </small>
+                    <div class="form-group">
+                          <select class="form-control" id="site">
+                            <option>Twitter App 01</option>
+                            <option>Twitter App 02</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+              <hr>
+              <h6>Configuration</h6>
+              <div class="text-uppercase mb-1 mt-4">
+                <small>
+                  <b>Add keywords</b>
+                </small>
+                <i class="icon-plus float-right"> Add </i>
+              </div>
+              <br>
+              
+              <form class="form-horizontal" action="" method="post">
+                <div class="form-group row">
+                  <div class="col-md-8">
+                    <input class="form-control" type="text" placeholder="Add keyword">
+                  </div>
+                  <div class="col-md-2">
+                      <button class="btn btn-block btn-outline-primary" type="button">Add</button>
+                  </div>
+                </div>
+              </form>  
+          </div>
+
+        </div>
+        <div class="aside-footer">
+          <div class="p-3 float-right">
+            <a href="/">
+                <button class="btn btn-lg btn-primary" type="button">Save And Continue</button>
+            </a>
+          </div>
+        </div>
+
+      </aside>
+    </div>
+    <%- include ../../partials/footer.ejs %>
+    <%- include ../../partials/scripts.ejs %>
+
+  </body>
+</html>

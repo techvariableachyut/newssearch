@@ -1,0 +1,38 @@
+const { ddb } = require( '../index');
+const config = require('../../config/config.js');
+const params = {
+    TableName: config.aws_user_session_table_name,
+    KeySchema: [
+      {
+        AttributeName: 'id',
+        KeyType: 'HASH'
+      },
+      {
+        AttributeName: 'email',
+        KeyType: 'Range'
+      }
+    ],
+    AttributeDefinitions: [
+      {
+        AttributeName: 'id',
+        AttributeType: 'S'
+      },
+      {
+        AttributeName: 'email',
+        AttributeType: 'S'
+      }
+    ],
+    ProvisionedThroughput: {
+      ReadCapacityUnits: 5,
+      WriteCapacityUnits: 5
+    }
+}
+  
+  
+ddb.createTable(params, function(err, data) {
+  if (err) {
+    console.log("Error", err);
+  } else {
+    console.log("Success", data);
+  }
+});

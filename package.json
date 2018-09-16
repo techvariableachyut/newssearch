@@ -1,17 +1,37 @@
 {
-    "name": "express-HelloWorld",
-    "description": "Hello World Node Express web application",
-    "version": "0.0.1",
-    "private": true,
-    "dependencies": {
-        "express": "4.16.2"
-    },
-    "devDependencies": {
-        "mocha": "5.0.0",
-        "unit.js": "2.0.0",
-        "supertest": "3.0.0"
-    },
-    "scripts": {
-        "test": "mocha --recursive tests --exit"
-    }
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "node app",
+    "start:dev": "nodemon app",
+    "test": "exit 0",
+    "create:tables": "node ./scripts/createTables"
+  },
+  "engines": {
+    "node": ">=6"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.228.1",
+    "body-parser": "^1.18.3",
+    "connect-dynamodb": "^2.0.1",
+    "dotenv": "^6.0.0",
+    "dynamodb": "^1.1.2",
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.3.0",
+    "lodash": "^4.17.10",
+    "lodash-clean": "^2.0.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4",
+    "mocha": "5.0.0",
+    "unit.js": "2.0.0",
+    "supertest": "3.0.0"
+  }
 }

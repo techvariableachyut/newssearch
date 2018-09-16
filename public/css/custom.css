@@ -1,0 +1,22 @@
+.aside-footer{
+  height:100px;
+
+  width: 100%;
+  z-index: 2000;
+  position: relative;
+}
+.loader-insite-aside{
+  text-align: center;
+  margin:20px;
+}
+
+.loader{
+  position: absolute;
+  
+}
+.save_and_trigger{
+  position: fixed;
+  bottom:10px;
+  right:10px;
+  z-index:9999;
+}

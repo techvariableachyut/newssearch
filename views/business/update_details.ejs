@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <%- include ../partials/head.ejs %>
+  <link href="/css/select2.min.css" rel="stylesheet">
+  </head>
+  <body class="app header-fixed sidebar-fixed aside-menu-fixed sidebar-lg-show">
+    <%- include ../partials/header.ejs %>
+    <div class="app-body">
+      <%- include ../partials/nav.ejs %>
+      <main class="main">
+        <!-- Breadcrumb-->
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">Home</li>
+          <li class="breadcrumb-item">
+            <a href="#">Admin</a>
+          </li>
+          <li class="breadcrumb-item active">Create Busines</li>
+          <!-- Breadcrumb Menu-->
+        </ol>
+        <div class="container-fluid">
+            <div class="col-sm-7">
+                <div class="card">
+                  <div class="card-header">
+                    <strong>Update Details</strong>
+                  </div>
+
+                  <input type="text" hidden="hidden" name="bid" value=<%= Items.id %>>
+
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label for="company">Business Name</label>
+                        <input class="form-control" id="company" name="bname" type="text" value=<%= Items.businessname %> >
+                      </div>
+                      <div class="form-group">
+                        <label for="vat">Industry Name</label>
+                        <input class="form-control" id="vat" name="industryname" type="text" value=<%= Items.industryName %> >
+                      </div>
+
+                      <div class="form-group">
+                          <label for="vat">Industry Description</label>
+                          <textarea class="form-control" name="bdesc" name="" id="" cols="30" rows="5"><%= Items.businessDesc %></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="street">Address</label>
+                        <input class="form-control" id="street" name="baddress"  type="text" value=<%= Items.address %> >
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="form-group col-sm-6">
+                          <label for="city">Admin Name</label>
+                          <input class="form-control" id="city" name="badmin" type="text" value=<%= Items.businessAdminName %> >
+                        </div>
+                        <div class="form-group col-sm-6">
+                          <label for="postal-code">Email</label>
+                          <input class="form-control" id="postal-code" name="badminemail" type="text" value=<%= Items.businessAdminEmail %> >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card-footer">
+                      <button id="config_card_load" class="btn btn-sm btn-primary" type="button">
+                      <i class="fa fa-dot-circle-o"></i> Next</button>
+                    </div> 
+
+                </div>
+              </div>
+        </div>
+      </main>
+
+
+  <!-- right side panel will appear here -->
+  <aside id="aside" class="aside-menu" style="margin-right: 0px;">
+    <ul class="nav nav-tabs" role="tablist">
+      
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#twitter" role="tab" aria-selected="false">
+            <i class="icon-social-twitter"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active show" data-toggle="tab" href="#facebook" role="tab" aria-selected="true">
+            <i class="icon-social-facebook"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " data-toggle="tab" href="#reddit" role="tab">
+            <i class="icon-social-reddit"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " data-toggle="tab" href="#instagram" role="tab">
+            <i class="icon-social-instagram"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " data-toggle="tab" href="#youtube" role="tab">
+            <i class="icon-social-youtube"></i>
+          </a>
+        </li>
+    </ul>
+    <div class="tab-content">
+      
+        <div class="tab-pane p-3" id="twitter" role="tabpanel">
+          <h6>Twitter</h6>
+          <div class="aside-options">
+            <div class="clearfix mt-4">
+              <small>
+                <b>Add Twitter</b>
+              </small>
+              <label class="switch switch-3d switch-primary float-right">
+                  <input id="activator_twitter" class="switch-input" onchange="makeActive.call(this)" type="checkbox" data-site="twitter">
+                  <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+          <hr>
+          <div id="tab-twitter">
+          <div class="aside-options">
+              <div class="clearfix mt-4">
+                <i>There is no App<p></p></i>
+              </div>
+              <i></i>
+            </div>
+          <div id="configure-twitter"> </div>
+        </div>
+    
+        <div class="tab-pane p-3 active show" id="facebook" role="tabpanel">
+          <h6>Facebook</h6>
+          <div class="aside-options">
+            <div class="clearfix mt-4">
+              <small>
+                <b>Add Facebook</b>
+              </small>
+              <label class="switch switch-3d switch-primary float-right">
+                  <input id="activator_facebook" class="switch-input" onchange="makeActive.call(this)" type="checkbox" data-site="facebook">
+                  <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+          <hr>
+          <div id="tab-facebook">
+            <div class="aside-options">
+                <div class="clearfix mt-4">
+                  <label for="select-app">Apps</label>
+                  <div class="form-group">
+                        
+            <select class="form-control" onchange="onChooseApp.call(this)" id="app-select-facebook">
+              <option value="">Choose One App</option>
+              
+            <option value="d285752c-f9d3-459f-92a6-fe06a2867bc2">Facebook App</option>
+            </select>
+                    </div>
+                </div>
+            </div><br></div>
+          <div id="configure-facebook">
+        <hr>
+        <h6>Configuration</h6>
+        
+            <div class="aside-options">
+              <div class="clearfix mt-4">
+                <small>
+                  <b>PUBLIC PAGE</b>
+                </small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-12">
+                <select multiple="" class="form-control sl2-custom-inp select2-hidden-accessible" id="facebook_public_page" name="facebook_public_page" data-select2-id="facebook_public_page" tabindex="-1" aria-hidden="true">
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="1" style="width: 457px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+              </div>
+            </div> 
+            <div class="aside-options">
+              <div class="clearfix mt-4">
+                <small>
+                  <b>KEYWORD</b>
+                </small>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-12">
+                <select multiple="" class="form-control sl2-custom-inp select2-hidden-accessible" id="facebook_keyword" name="facebook_keyword" data-select2-id="facebook_keyword" tabindex="-1" aria-hidden="true">
+                </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 457px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="textbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+              </div>
+            </div> 
+      </div>
+        </div>
+    
+        <div class="tab-pane p-3 " id="reddit" role="tabpanel">
+          <h6>Reddit</h6>
+          <div class="aside-options">
+            <div class="clearfix mt-4">
+              <small>
+                <b>Add Reddit</b>
+              </small>
+              <label class="switch switch-3d switch-primary float-right">
+                  <input id="activator_reddit" class="switch-input" onchange="makeActive.call(this)" type="checkbox" data-site="reddit">
+                  <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+          <hr>
+          <div id="tab-reddit"> </div>
+          <div id="configure-reddit"> </div>
+        </div>
+    
+        <div class="tab-pane p-3 " id="instagram" role="tabpanel">
+          <h6>Instagram</h6>
+          <div class="aside-options">
+            <div class="clearfix mt-4">
+              <small>
+                <b>Add Instagram</b>
+              </small>
+              <label class="switch switch-3d switch-primary float-right">
+                  <input id="activator_instagram" class="switch-input" onchange="makeActive.call(this)" type="checkbox" data-site="instagram">
+                  <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+          <hr>
+          <div id="tab-instagram"> </div>
+          <div id="configure-instagram"> </div>
+        </div>
+    
+        <div class="tab-pane p-3 " id="youtube" role="tabpanel">
+          <h6>Youtube</h6>
+          <div class="aside-options">
+            <div class="clearfix mt-4">
+              <small>
+                <b>Add Youtube</b>
+              </small>
+              <label class="switch switch-3d switch-primary float-right">
+                  <input id="activator_youtube" class="switch-input" onchange="makeActive.call(this)" type="checkbox" data-site="youtube">
+                  <span class="switch-slider"></span>
+              </label>
+            </div>
+          </div>
+          <hr>
+          <div id="tab-youtube"> </div>
+          <div id="configure-youtube"> </div>
+        </div>
+    
+    </div>
+
+
+
+  </aside>
+      <div id="save_and_trigger" class="save_and_trigger">
+        <div class="p-3 float-right">
+              <button id="save_and_update_btn" class="btn btn-lg btn-primary" type="button">Update And Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <%- include ../partials/footer.ejs %>
+    <%- include ../partials/scripts.ejs %>
+
+    <script src="/js/select2.min.js"></script>
+    <script src="/js/app/config.js"></script>
+    <script src="/js/app/business-create.js"></script>  
+  </body>
+</html>
