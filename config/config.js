@@ -1,3 +1,4 @@
+require('dotenv').config()
 module.exports = {
   aws_user_table_name: process.env.NODE_ENV+'_usersTable',
   aws_user_session_table_name: process.env.NODE_ENV+'_userSessionsTable',

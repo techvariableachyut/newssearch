@@ -204,59 +204,24 @@
                             <th>Activity</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                          
-                            <td>
-                              <div>Lorem ipsum</div>
-                              <div class="small text-muted">
-                                <span>New</span> | Registered: Jan 1, 2015</div>
-                            </td>
-                            <td class="text-center">
-                                <div>Ship Industry</div>
-                            </td>
-                            <td>
-                              <div class="clearfix">
-                                <div class="float-left">
-                                  <strong>Active</strong>
-                                </div>
-                              
-                              </div>
-                            
-                            </td>
-                        
-                            <td>
-                              <div class="small text-muted">Last login</div>
-                              <strong>10 sec ago</strong>
-                            </td>
-                          </tr>
 
-                          <tr>
-                          
+                        <tbody>
+                            <% for(var i=0; i < data.length; i++) { %>
+                            <tr>
                               <td>
-                                <div>Lorem ipsum</div>
-                                <div class="small text-muted">
-                                  <span>New</span> | Registered: Jan 1, 2015</div>
-                              </td>
-                              <td class="text-center">
-                                  <div>Ship Industry</div>
+                                <span><%= data[i].businessname %></span>
                               </td>
                               <td>
-                                <div class="clearfix">
-                                  <div class="float-left">
-                                    <strong>Active</strong>
-                                  </div>
-                                
-                                </div>
-                              
+                                <span><%= data[i].industryName %></span>
                               </td>
-                          
                               <td>
-                                <div class="small text-muted">Last login</div>
-                                <strong>10 sec ago</strong>
+                                <span><%= data[i].address %></span>
+                              </td>
+                              <td>
+                                <span class="badge badge-success">Active</span>
                               </td>
                             </tr>
-
+                          <% } %>
                         </tbody>
                       </table>
                     </div>

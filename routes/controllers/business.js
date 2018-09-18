@@ -82,8 +82,20 @@ module.exports = (app) => {
           });
         } else {
           const { Items } = data;
-          console.log(Items);
-          console.log()
+          // console.log(Items)
+          console.log(Items[0].socialMedia[1]);
+          
+          for(mem in Items[0].socialMedia[1])
+          {
+            if(Items[0].socialMedia[1].mem == null)
+            {
+              console.log('done')
+            }
+            else {
+              console.log('not done')
+            }
+          }
+
           res.render('business/details',{Items:Items[0]})
 
         }
@@ -127,6 +139,54 @@ module.exports = (app) => {
       //     ':i': bid
       //   }
       // };
+
+      console.log(req.body.socialMedia)
+
+      // var params = {
+      // TableName: config.aws_business_table_name,
+      // Key:{
+      //     "id": ":bid"
+      // },
+      // UpdateExpression: "set socialMedia = :s",
+      // ExpressionAttributeValues:{
+      //     ":bid": bid,
+      //     ":s": JSON.parse(req.body.socialMedia)
+      // },
+      // ReturnValues:"UPDATED_NEW"
+      // };
+
+      
+      // docClient.update(params, function(err, data) {
+      //     if (err) {
+      //         console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+      //     } else {
+      //         console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+      //     }
+      // });
+
+      var params = {
+    TableName: 'local_businessTable',
+    Key: { 
+      
+    },
+    KeyConditionExpression: 'id = :i',
+    UpdateExpression: 'SET address = :a1, industryName = :name, myname = :mn, socialMedia = :sm',
+    ExpressionAttributeValues: { 
+        ':i':  bid,
+        ':a1': 'nilu',
+        ':name': 'nilu',
+        ':mn': 'Nilutpal',
+        ':sm': JSON.parse(req.body.socialMedia)
+    }
+};
+docClient.update(params, function(err, data) {
+          if (err) {
+              console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+          } else {
+              console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+          }
+      });
+
       res.redirect('/')
   })
 
